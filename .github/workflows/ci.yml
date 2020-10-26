@@ -7,20 +7,6 @@ on:
       - master
 
 jobs:
-  build-and-lint:
-    if: contains(github.event.commits[0].message, '[skip ci]') == false
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v1
-        with:
-          submodules: recursive
-
-      - name: Install NPM dependencies and compile
-        uses: bahmutov/npm-install@v1.1.0
-
-      - name: Run ESLint
-        run: npm run eslint
   unit-tests:
     runs-on: windows-latest
     steps:
@@ -28,9 +14,6 @@ jobs:
         uses: actions/checkout@v1
         with:
           submodules: recursive
-
-      - name: Install NPM dependencies and compile
-        uses: bahmutov/npm-install@v1.1.0
 
       - name: Install Python dependencies
         run: pip install wget psutil
@@ -50,9 +33,6 @@ jobs:
 
       - name: Install Rojo and run-in-roblox
         run: foreman install
-
-      - name: Compile and run tests
-        run: npm test
 
       - name: Report Coverage
         continue-on-error: true
