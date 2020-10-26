@@ -18,6 +18,9 @@ jobs:
       - name: Install Python dependencies
         run: pip install wget psutil
 
+      - name: Install NPM dependencies and compile
+        uses: bahmutov/npm-install@v1.1.0
+
       - name: Install Roblox Studio
         run: |
           if (![string]::IsNullOrEmpty("${{ secrets.ROBLOSECURITY }}")) {
@@ -33,6 +36,9 @@ jobs:
 
       - name: Install Rojo and run-in-roblox
         run: foreman install
+
+      - name: Compile and run tests
+        run: npm test
 
       - name: Report Coverage
         continue-on-error: true
